@@ -1,0 +1,14 @@
+version: '2'
+services:
+    gateway1-postgresql:
+        image: postgres:9.6.5
+        volumes:
+            - gateway1_postgresql_volume:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=gateway1
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
+volumes:
+    gateway1_postgresql_volume:
+        external: true
