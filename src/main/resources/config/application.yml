@@ -57,6 +57,7 @@ hystrix:
 management:
     security:
         roles: ADMIN
+        enabled: false
     context-path: /management
     info:
         git:

@@ -6,6 +6,8 @@ import io.nellmedina.web.rest.errors.InternalServerErrorException;
 import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +24,18 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/api")
+@RefreshScope
 public class AccountResource {
 
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+
+    @Value("${nell.medina}")
+    private String val;
+
+    @GetMapping("/nell")
+    public String nell(HttpServletRequest request) {
+        return val;
+    }
 
     /**
      * GET  /authenticate : check if the user is authenticated, and return its login.
